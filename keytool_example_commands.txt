@@ -1,0 +1,25 @@
+// Generate KEY PAIR
+keytool -genkeypair -alias testkey -keyalg RSA -keysize 2048 -dname "CN=Aritra Nag, OU=Aritra Aps, O=Aritra Aps, L=Gothenburg, ST=Unknown, C=DK"  -keypass 123456  -validity 100  -storetype JKS  -keystore keystore.jks -storepass abcdef
+
+//Export Certificate
+keytool -exportcert -alias testkey -keypass 123456   -storetype JKS   -keystore keystore.jks    -file cert.cert  -rfc  -storepass abcdef
+
+//Import Certificate
+keytool -importcert -alias testkey -keypass 123456 -storetype JKS -keystore keystore2.jks  -file cert.cert -rfc -storepass abcdef
+
+//List Keystore Entries
+keytool -list -storetype JKS -keystore keystore.jks -storepass abcdef
+
+//Generate Certificate Request
+keytool -certreq -alias testkey -keypass 123456 -storetype JKS  -keystore keystore.jks  -storepass abcdef -file certreq.certreq
+
+
+// Create Certificate Chain using Keytool
+https://www.pixelstech.net/article/1450354633-Using-keytool-to-create-certificate-chain
+
+// Create Certificate Chain using Java
+https://www.pixelstech.net/article/1406726666-Generate-certificate-in-Java----Certificate-chain
+
+
+// CREATE TRUST CA and ISSUE CERTIFICATES USING Keystore
+https://sites.google.com/site/ddmwsst/create-your-own-certificate-and-ca
